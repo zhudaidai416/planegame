@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background-color: #ede3e7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 游戏榜 */
+#content {
+  width: 350px;
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  padding: 15px;
+  border: 2px solid lightslategray;
+  border-radius: 10px;
+  background-image: url(./images/background_2.png);
+}
+
+.font-style {
+  font-size: 26px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.font-style img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.icon {
+  font-size: 30px;
+  margin: 10px;
+}
+
+#score2 {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  display: none;
+}
+
+#pauseGame {
+  display: none;
+}
+
+/* 游戏主界面 */
+#game {
+  width: 400px;
+  height: 600px;
+  position: absolute;
+  border-radius: 10px;
+  border: 2px solid lightslategray;
+  background-image: url(./images/background_1.png);
+  background-size: 100% 120%;
+  overflow: hidden;
+}
+
+#title {
+  text-align: center;
+  margin-top: 160px;
+}
+
+#btn1,
+#back,
+#again,
+#continuegame {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgb(171, 191, 189);
+  border: 2px solid lightslategray;
+  border-radius: 25px;
+  margin: 25px auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+#btn1:hover,
+#back:hover,
+#again:hover,
+#continuegame:hover {
+  background-color: #d8e6cd;
+}
+
+#btn1 {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+}
+
+#audio {
+  position: absolute;
+  color: gray;
+  bottom: 0;
+  right: 0;
+}
+
+/* 弹出框 */
+#popup {
+  width: 210px;
+  height: 260px;
+  position: absolute;
+  background-color: bisque;
+  border-radius: 10px;
+  border: 2px solid lightslategray;
+  display: none;
+}
+
+/* 游戏结束提示 */
+#gameover {
+  width: 210px;
+  height: 160px;
+  position: absolute;
+  text-align: center;
+  background-color: bisque;
+  border-radius: 10px;
+  border: 2px solid lightslategray;
+  display: none;
+}
+
+#gamescore {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 30px 0;
+}
+
+#again2,
+#back2 {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  background-color: rgba(171, 191, 189);
+  border: 2px solid lightslategray;
+  margin: 0 10px;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+}

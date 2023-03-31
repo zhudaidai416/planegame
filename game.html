@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>飞机大战</title>
+  <link rel="stylesheet" href="./fonts/iconfont.css">
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="./game.css">
+</head>
+
+<body>
+  <!-- 游戏榜 -->
+  <div id="content">
+    <div class="font-style">
+      <img src="./images/planet.png" alt="">
+      <span>总分：</span>
+      <span id="score1">0</span>
+    </div>
+    <div class="font-style">
+      <img src="./images/rocket.png" alt="">
+      <span>杀敌：</span>
+      <span id="kill">0</span>
+    </div>
+    <div class="font-style">
+      <img src="./images/spaceman.png" alt="">
+      <span>血量：</span>
+      <span id="blood">0</span>
+    </div>
+    <div class="font-style"><img src="./images/spaceship.png" alt="">
+      <span>规则说明：</span>
+    </div>
+    <div>
+      <span>控制战斗机移动:</span><img style="width:75px; height:55px; margin-bottom:-5px;" src="./images/key1.png" alt="">
+      <br>
+      <span>暂停:</span><img style="width:75px; height:35px; margin-bottom:-5px;" src="./images/key2.png" alt="">
+      <br>
+      <span>子弹数目：按1、2、3</span>
+    </div>
+  </div>
+
+  <!-- 游戏主界面 -->
+  <div id="game">
+    <!-- 左上角暂停键 -->
+    <div class="iconfont icon-zanting icon" onclick="pauseGame()" id="pauseGame"></div>
+    <!-- 右上角积分 -->
+    <div id="score2">0</div>
+    <!-- 开始游戏按钮 -->
+    <div id="btn1" onclick="startGame()">开始游戏</div>
+
+    <!-- 背景音乐 -->
+    <div id="audio" class="iconfont icon-Volume icon" onclick="Music()">
+      <audio src="./audios/萤火之森.mp3" loop="loop" autoplay></audio>
+    </div>
+    <div id="bullet_sound"><audio src="./audios/bullet.wav"></audio></div>
+    <div id="bz_sound1"><audio src="./audios/enemy1_down.wav"></audio></div>
+    <div id="bz_sound2"><audio src="./audios/enemy2_down.wav"></audio></div>
+    <div id="bz_sound3"><audio src="./audios/enemy3_down.wav"></audio></div>
+    <div id="player_bz"><audio src="./audios/me_down.wav"></audio></div>
+  </div>
+
+  <!-- 弹出框 -->
+  <div id="popup">
+    <div id="back" onclick="back()">回到主页</div>
+    <div id="again" onclick="againGame()">重新开始</div>
+    <div id="continuegame" onclick="pauseGame()">继续游戏</div>
+  </div>
+
+  <!-- 游戏结束提示 -->
+  <div id="gameover">
+    <div id="gamescore"></div>
+    <div id="again2" onclick="againGame()">再来一局</div>
+    <div id="back2" onclick="back()">退出</div>
+  </div>
+
+  <script src="./game.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "23960081",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "26850215",
+      "name": "音量",
+      "font_class": "Volume",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "26850224",
+      "name": "静音",
+      "font_class": "Mute",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    }
+  ]
+}
