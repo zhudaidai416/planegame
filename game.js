@@ -1,3 +1,4 @@
+// 变量
 let gameDiv = document.getElementById('game')
 let scoreDiv = document.getElementById('score1')
 let killDiv = document.getElementById('kill')
@@ -14,17 +15,17 @@ let kill = 0
 let enemyPlaneSpeed = 3
 let propUseTime = 10
 let timer1, timer2, timer3, timer4, timer5, timer6, timer7, timer8, timer9
-let gameState = false
-let musicState = true
+let gameState = false  // 游戏状态
+let musicState = true  // 背景音乐状态
 
 // 开始游戏
 function startGame() {
   let btn1 = document.getElementById('btn1')
   let pause = document.getElementById('pauseGame')
-  gameDiv.style.background = 'url(./images/background_2.png) 100% 120%'
-  btn1.style.display = 'none'
-  pause.style.display = 'block'
-  scoreDiv2.style.display = 'block'
+  gameDiv.style.background = 'url(./images/background_2.png) 100% 120%'  // 游戏主界面背景更换
+  btn1.style.display = 'none'  // 开始游戏按钮隐藏
+  pause.style.display = 'block'  // 左上角暂停键显示
+  scoreDiv2.style.display = 'block'  // 右上角积分显示
   gameState = true
   timer()
   createPlayer()
@@ -55,17 +56,20 @@ function timer() {
   timer5 = setInterval(() => {
     player.shoot1()
   }, 300);
-  // 判断碰撞
+  // 判断敌方飞机与玩家飞机是否发生碰撞
   timer6 = setInterval(() => {
-    crashCheck()
+    planeCrash()
   }, 15)
+  // 创建道具
   timer7 = setInterval(() => {
     createProp()
     propNum++
-  }, 10000);
+  }, 10000)
+  // 道具移动
   timer8 = setInterval(() => {
     propMove()
   }, 50)
+  // 判断道具与玩家飞机是否发生碰撞
   timer9 = setInterval(() => {
     propCrash()
   }, 15)
@@ -86,7 +90,8 @@ function clearTimer() {
 
 // 创建敌方飞机
 function createEnemyPlane() {
-  console.log("当前敌方飞机速度" + enemyPlaneSpeed)
+  // 敌方飞机速度设置：当30<敌方飞机数量<=50，敌方飞机速度调整为5；当敌方飞机数量>50，敌方飞机速度调整为8
+  // console.log("当前敌方飞机速度" + enemyPlaneSpeed)
   if (30 < enemyNum && enemyNum <= 50) {
     enemyPlaneSpeed = 5
     console.log("当前敌方飞机速度" + enemyPlaneSpeed)
@@ -95,6 +100,8 @@ function createEnemyPlane() {
     enemyPlaneSpeed = 8
     console.log("当前敌方飞机速度" + enemyPlaneSpeed)
   }
+  // 敌方飞机创建频率：每5架飞机就会出现1架中飞机，每20架飞机就会有1架大飞机
+  // 366 = 游戏界面宽度 - 敌方飞机宽度
   let enemyPlane1 = new EnemyPlane('./images/enemy_plane1.png', parseInt(Math.random() * 366), 0, enemyPlaneSpeed, 3, 1)
   enemyList.push(enemyPlane1)
   if (enemyNum != 0 && enemyNum % 6 == 0) {
@@ -105,10 +112,9 @@ function createEnemyPlane() {
     let enemyPlane3 = new EnemyPlane('./images/enemy_plane3.png', parseInt(Math.random() * 290), 0, enemyPlaneSpeed, 20, 3)
     enemyList.push(enemyPlane3)
   }
-  // 366 = 游戏界面宽度 - 敌方飞机宽度
 }
 
-// 敌方飞机的构造函数
+// 敌方飞机的构造函数（图片，横轴位置，纵轴位置，速度，血量，种类）
 function EnemyPlane(imgSrc, x, y, speed, blood, kind) {
   this.imgNode = document.createElement('img')
   this.imgSrc = imgSrc
@@ -119,6 +125,7 @@ function EnemyPlane(imgSrc, x, y, speed, blood, kind) {
   this.speed = speed
   this.blood = blood
   this.kind = kind
+  // 3种敌方飞机的积分
   if (this.kind == 1) {
     this.score = 10
   } else if (this.kind == 2) {
@@ -126,9 +133,11 @@ function EnemyPlane(imgSrc, x, y, speed, blood, kind) {
   } else if (this.kind == 3) {
     this.score = 30
   }
+  // 敌方飞机移动函数
   this.move = function () {
     this.imgNode.style.top = parseInt(this.imgNode.style.top) + this.speed + 'px'
   }
+  // 敌方飞机起始出现位置：需要添加最后的子节点
   this.init = function () {
     this.imgNode.src = this.imgSrc
     this.imgNode.style.position = 'absolute'
@@ -141,8 +150,12 @@ function EnemyPlane(imgSrc, x, y, speed, blood, kind) {
 
 // 敌方飞机移动
 function enemyMove() {
+  // 循环判断敌方飞机列表的状态：
+  // 1、如果敌方飞机死掉，显示飞机消失效果，数量、积分累加，删除飞机节点及列表；
+  // 2、如果没死，敌方飞机节点没超过游戏界面大小，执行敌方飞机移动函数；否则删除飞机节点及列表
   for (let i = 0; i < enemyList.length; i++) {
     if (enemyList[i].isDead == true) {
+      // deadTime起始值为10，自减可以让消失效果看起来不突兀（延时作用）
       enemyList[i].deadTime--
       if (enemyList[i].deadTime == 0) {
         score += enemyList[i].score
@@ -166,8 +179,8 @@ function enemyMove() {
 
 // 创建玩家飞机
 function createPlayer() {
-  player = new PlayerPlane('./images/player_plane.gif', 167, 500, 10, 5)
   // 167 = 1/2游戏界面 - 1/2玩家飞机
+  player = new PlayerPlane('./images/player_plane.gif', 167, 500, 10, 5)
 }
 
 // 玩家飞机的构造函数
@@ -235,7 +248,10 @@ function PlayerPlane(imgSrc, x, y, speed, blood) {
 }
 
 // 判断玩家按键
+// 按键说明：
+// 上下左右：移动方向；j：一个子弹；2：两个子弹；3：三个子弹；空格：暂停游戏
 function eventKey() {
+  // 按下键盘
   document.onkeydown = function (e) {
     // console.log(e)
     if (e.key == 'ArrowLeft') {
@@ -275,6 +291,7 @@ function eventKey() {
       }, 300);
     }
   }
+  // 释放键盘
   document.onkeyup = function (e) {
     if (e.key == 'ArrowLeft') {
       player.leftState = false
@@ -342,7 +359,7 @@ function bulletMove() {
 }
 
 // 判断子弹和敌方飞机是否碰撞
-function crashCheck() {
+function planeCrash() {
   let bz_sound1 = document.getElementById('bz_sound1')
   let bz_sound2 = document.getElementById('bz_sound2')
   let bz_sound3 = document.getElementById('bz_sound3')
